@@ -62,7 +62,6 @@ def publicusr(pubKey):
      print("\nAs a public user, what would you like to do?")
      print("1. Send an encrypted message \n2. Authenticate a digital signature \n3. Exit")
      choice = int(input("Enter your choice: "))
-<<<<<<< HEAD
     
      while(choice != 3):
          if (choice ==1):
@@ -75,7 +74,7 @@ def publicusr(pubKey):
             print("TEST REPLACE LATER")
    
      
-=======
+
      if choice ==1:
         string = None
         string = str(input("Enter a message: "))
@@ -87,10 +86,7 @@ def publicusr(pubKey):
     #Exit to menu
      elif choice == 3:
          main()
-<<<<<<< HEAD
->>>>>>> 3deeff7f572cbed402bf952c21bb6162bd52ba20
-=======
->>>>>>> 3deeff7f572cbed402bf952c21bb6162bd52ba20
+
 
 ## Owner of keys
 def owner(privkey):

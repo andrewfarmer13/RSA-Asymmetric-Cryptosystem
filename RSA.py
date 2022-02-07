@@ -32,7 +32,7 @@ def menu():
     elif choice == 2:
         owner()
     elif choice ==3:
-        sys.exit("Quitting")
+        exit()
         
 ## Public User
 def publicusr():
@@ -46,6 +46,8 @@ def publicusr():
                 
         ## CALL ENCRYPT AND send string
         print("Message encrypted and sent.")
+     if choice ==2:
+        print("TEST REPLACE LATER")
     #Exit to menu
      elif choice == 3:
         menu()
@@ -53,6 +55,7 @@ def publicusr():
 ## Owner of keys
 def owner():
     print("temp")
+
 
 ##Driver Function
 def main():

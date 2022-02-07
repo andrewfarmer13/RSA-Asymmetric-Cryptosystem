@@ -45,7 +45,7 @@ def publicusr():
         print("TEST REPLACE LATER")
     #Exit to menu
      elif choice == 3:
-         exit()
+         main()
 
 ## Owner of keys
 def owner():
@@ -67,5 +67,5 @@ def main():
             owner()
     
         
-    
+## Starts Main   
 main()

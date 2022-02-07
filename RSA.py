@@ -87,6 +87,9 @@ def publicusr(pubKey):
     #Exit to menu
      elif choice == 3:
          main()
+<<<<<<< HEAD
+>>>>>>> 3deeff7f572cbed402bf952c21bb6162bd52ba20
+=======
 >>>>>>> 3deeff7f572cbed402bf952c21bb6162bd52ba20
 
 ## Owner of keys

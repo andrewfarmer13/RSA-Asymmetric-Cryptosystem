@@ -23,12 +23,17 @@ def decrypt():
     
 ## Main Selection Menu
 def menu():
-    print("Please select your user type:")
+    print("\nPlease select your user type:")
     print("1. Public User \n2. The owner of the keys \n3. Exit Program")
     choice = None
     choice = int(input("\nPlease Enter your choice: "))  
     if choice == 1:
         publicusr()
+    elif choice == 2:
+        owner()
+    elif choice ==3:
+        sys.exit("Quitting")
+        
 ## Public User
 def publicusr():
      print("\nAs a public user, what would you like to do?")
@@ -41,8 +46,13 @@ def publicusr():
                 
         ## CALL ENCRYPT AND send string
         print("Message encrypted and sent.")
+    #Exit to menu
      elif choice == 3:
         menu()
+
+## Owner of keys
+def owner():
+    print("temp")
 
 ##Driver Function
 def main():

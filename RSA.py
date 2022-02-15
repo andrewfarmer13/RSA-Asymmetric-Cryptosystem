@@ -1,28 +1,71 @@
 ##Contributers: Andrew Farmer, Clayton McEntire
 import math
 import random
-import sys, traceback
+## Importing allows for exiting of program without error. 
+import sys
 
 ##Generates both public and private keys
 def generate():
     
     ##We need to add a generate prime number function to get a larger n
-    n = 10200
+    ##Max Size
+    n = 500000
+    ## Min Size
+    m = 10000
     
-    ##Generates public Key
-    divisor = 2
-    while(divisor != 1):
-        e = random.randint(0, n)
-        divisor = math.gcd(e, n)
-        
-    x, y,d = extended_gcd(e, n)
+    ## Generate Public Key
+    p = random.randint(m,n);
     
+    x = random.randint(2,p);
+   
+    ## Call Fermats test
+    ## Function will determine true or false if prime 
+    t = determine_prime(p,x)
+    ## If it is not prime re call the function untill a prime is found 
+    if t == False:
+        generate()
     
-    print("Divisor: " + str(divisor))
-    print("Public Key: " + str(e))
-    print("Private Key: " + str(x))
-    return ((e,n),(x,n))
-    
+    ## ALSO TEMPARARY DELETE WHEN BELOW IS UNCOMMMENTED
+    return((p,p),(p,p))
+   
+## TEMPARARALY COMMENTED OUT 
+## TO UNCOMMENT PLEASE SELECT TEXT AND PRESS CTRL + 1
+# 
+#     ##Generates public Key
+#     divisor = 2
+#     while(divisor != 1):
+#         e = random.randint(0, n)
+#         divisor = math.gcd(e, n)
+#         
+#     x, y,d = extended_gcd(e, n)
+#     
+#     
+#     print("Divisor: " + str(divisor))
+#     print("Public Key: " + str(e))
+#     print("Private Key: " + str(x))
+#     return ((e,n),(x,n))
+# 
+# 
+
+## Fermats Test 
+def determine_prime(p,x):
+## Preform Fermat's Test 40 times
+   
+    i=0
+    t=True
+   ## Loop 40 times to determine if prime and if it isnt stop immedately 
+    while i!=40 and t == True:
+          if pow(x, p-1, p) != 1:
+              print("Value "+ str(p) +" Is not prime")
+              t = False
+              break
+          i += 1
+    ## IF the full loop has been ran then the number is prime
+    if t == True:
+        print("Value "+ str(p) +" Is prime")
+    ## Returns t to let generate know if it is true or false
+    return t
+
  ##Extended GCD
 def extended_gcd(a =1, b = 1):
     if b == 0:

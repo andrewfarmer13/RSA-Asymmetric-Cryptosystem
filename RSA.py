@@ -21,7 +21,7 @@ def generate():
     ## Call Fermats test
     ## Function will determine true or false if prime 
     t = determine_prime(p,x)
-    ## If it is not prime re call the function untill a prime is found 
+    ## If it is not prime re-call the function untill a prime is found 
     if t == False:
         generate()
     
@@ -56,14 +56,16 @@ def determine_prime(p,x):
    ## Loop 40 times to determine if prime and if it isnt stop immedately 
     while i!=40 and t == True:
           if pow(x, p-1, p) != 1:
+              ## Print can be commented out after viewing
               print("Value "+ str(p) +" Is not prime")
               t = False
               break
           i += 1
     ## IF the full loop has been ran then the number is prime
+    ## If and print can be commented out after viewing
     if t == True:
         print("Value "+ str(p) +" Is prime")
-    ## Returns t to let generate know if it is true or false
+    ## Returns t to let generate know if it is prime or not
     return t
 
  ##Extended GCD

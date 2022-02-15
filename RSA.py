@@ -1,6 +1,7 @@
 ##Contributers: Andrew Farmer, Clayton McEntire
 import math
 import random
+import sys, traceback
 
 ##Generates both public and private keys
 def generate():
@@ -106,6 +107,9 @@ def main():
             publicusr(public)
         elif choice == 2:
             owner(private)
+        elif choice ==3:
+            sys.exit();
+          
     
         
 ## Starts Main   

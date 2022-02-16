@@ -166,10 +166,15 @@ def publicusr(pubKey):
             break
          elif (choice ==2):
             print("TEST REPLACE LATER")
+            return ciphertext
+        
+         elif (choice==3):
+             print("Bye for now!")
+             sys.exit();
    
      
 
-     return ciphertext
+
 
 
 ## Owner of keys
@@ -188,6 +193,8 @@ def main():
     
     print(str(public) + " " +str(private))
     
+
+    
     while(choice != 3):
         print("\nPlease select your user type:")
         print("1. Public User \n2. The owner of the keys \n3. Exit Program")
@@ -197,7 +204,9 @@ def main():
         elif choice == 2:
             owner(private, encryptedMessage)
         elif choice ==3:
-            sys.exit();
+             print("Bye for now!")
+             sys.exit();
+  
           
     
         

@@ -1,4 +1,4 @@
-##Contributers: Andrew Farmer, Clayton McEntire
+##Contributers: Andrew Farmer, Clayton McEntire, Chandler Richmond
 import math
 import random
 ## Importing allows for exiting of program without error. 

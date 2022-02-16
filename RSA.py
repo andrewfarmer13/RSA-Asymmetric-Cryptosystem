@@ -7,34 +7,44 @@ import sys
 ##Generates both public and private keys
 def generate():
     
-    divisor = 2
+
+    t= False
     ##We need to add a generate prime number function to get a larger n
     ##Max Size
     n = 500000
     ## Min Size
     m = 10000
     
-    ## Generate Public Key
-    p = random.randint(m,n);
     
-    q = random.randint(m,n);
-   
-    ## Call Fermats test
-    ## Function will determine true or false if prime 
-    t = determine_prime(p,q)
-    ## If it is not prime re-call the function untill a prime is found 
-    if t == False:
-        generate()
+    
+    
+    while(t == False):
+        ## Generate Public Key
+        p = random.randint(m,n);
         
-    x = random.randint(m,n)
+        q = random.randint(m,n);
+       
+        ## Call Fermats test
+        ## Function will determine true or false if prime 
+        t = determine_prime(p,q)
+        ## If it is not prime re-call the function untill a prime is found 
+        
+       
+    z=p*q 
+    
     pq=(p-1)*(q-1)
-    while(divisor!=1):
-        divisor = math.gcd(x,pq)
+    e = random.randint(m,pq)
+    divisor = math.gcd(e, pq)
+    while(divisor !=1):
+        e = random.randint(m,z)
+        divisor = math.gcd(e,pq)
         
-    pubkey=divisor
+    pubkey=e
+    
+    privkey = multiplicative_inverse(e, pq)
     
     ## ALSO TEMPARARY DELETE WHEN BELOW IS UNCOMMMENTED
-    return(pubkey, privkey, pq)
+    return(((pubkey,n), (privkey,n)))
    
 ## TEMPARARALY COMMENTED OUT 
 ## TO UNCOMMENT PLEASE SELECT TEXT AND PRESS CTRL + 1
@@ -76,6 +86,30 @@ def determine_prime(p,x):
     ## Returns t to let generate know if it is prime or not
     return t
 
+def multiplicative_inverse(e, pq):
+    d = 0
+    x1 = 0
+    x2 = 1
+    y1 = 1
+    temp_pq = pq
+
+    while e > 0:
+        temp1 = temp_pq//e
+        temp2 = temp_pq - temp1 * e
+        temp_pq = e
+        e = temp2
+
+        x = x2 - temp1 * x1
+        y = d - temp1 * y1
+
+        x2 = x1
+        x1 = x
+        d = y1
+        y1 = y
+
+    if temp_pq == 1:
+        return d + pq
+
  ##Extended GCD
 def extended_gcd(a =1, b = 1):
     if b == 0:
@@ -95,21 +129,27 @@ def authenticate():
 ##Encrypts with a public key
 def encrypt(string, pubkey):
    key, n = pubkey
-   
-   ##Not sold on this, just the intial idea
    ciphertext = ""
    string = string.upper()
-   for x in string:
-       x = ord(x)
-       a = chr((x**key)%n)
-       ciphertext += a
+   for char in string:
+       ciphertext = (pow(ord(char), key, n))
 
    return ciphertext
         
     
 ##Decrypts with a private key
-def decrypt():
-    print("test")
+def decrypt(privkey, encryptedMessage):
+    # Unpack the key into its components
+    key, n = privkey
+    plaintext = ""
+   
+    for char in str(encryptedMessage):
+        plaintext += chr(pow(ord(char), key, n))
+        
+    print(plaintext)
+
+
+
     
 ## Public User
 def publicusr(pubKey):
@@ -122,29 +162,23 @@ def publicusr(pubKey):
             string = str(input("Enter a message: "))
             ciphertext = encrypt(string, pubKey)
             ## CALL ENCRYPT AND send string
-            print(ciphertext)
+            print("message encrypted")
             break
          elif (choice ==2):
             print("TEST REPLACE LATER")
    
      
 
-     if choice ==1:
-        string = None
-        string = str(input("Enter a message: "))
-        encrypt(string)
-        ## CALL ENCRYPT AND send string
-        print("Message encrypted and sent.")
-     if choice ==2:
-        print("TEST REPLACE LATER")
-    #Exit to menu
-     elif choice == 3:
-         main()
+     return ciphertext
 
 
 ## Owner of keys
-def owner(privkey):
-    print("test")
+def owner(privkey,encryptedMessage):
+   print("\nAs an owner, what would you like to do?")
+   print("1.Decrypt an encrypted messaged")
+   
+   message = decrypt(privkey, encryptedMessage)
+   print(message)
 
 
 ##Driver Function
@@ -152,14 +186,16 @@ def main():
     public, private = generate()
     choice = 0;
     
+    print(str(public) + " " +str(private))
+    
     while(choice != 3):
         print("\nPlease select your user type:")
         print("1. Public User \n2. The owner of the keys \n3. Exit Program")
         choice = int(input("\nPlease Enter your choice: "))  
         if choice == 1:
-            publicusr(public)
+          encryptedMessage = publicusr(public)
         elif choice == 2:
-            owner(private)
+            owner(private, encryptedMessage)
         elif choice ==3:
             sys.exit();
           

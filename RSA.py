@@ -7,6 +7,7 @@ import sys
 ##Generates both public and private keys
 def generate():
     
+    divisor = 2
     ##We need to add a generate prime number function to get a larger n
     ##Max Size
     n = 500000
@@ -16,36 +17,43 @@ def generate():
     ## Generate Public Key
     p = random.randint(m,n);
     
-    x = random.randint(2,p);
+    q = random.randint(m,n);
    
     ## Call Fermats test
     ## Function will determine true or false if prime 
-    t = determine_prime(p,x)
+    t = determine_prime(p,q)
     ## If it is not prime re-call the function untill a prime is found 
     if t == False:
         generate()
+        
+    x = random.randint(m,n)
+    pq=(p-1)*(q-1)
+    while(divisor!=1):
+        divisor = math.gcd(x,pq)
+        
+    pubkey=divisor
     
     ## ALSO TEMPARARY DELETE WHEN BELOW IS UNCOMMMENTED
-    return((p,p),(p,p))
+    return(pubkey, privkey, pq)
    
 ## TEMPARARALY COMMENTED OUT 
 ## TO UNCOMMENT PLEASE SELECT TEXT AND PRESS CTRL + 1
-# 
-#     ##Generates public Key
-#     divisor = 2
-#     while(divisor != 1):
-#         e = random.randint(0, n)
-#         divisor = math.gcd(e, n)
-#         
-#     x, y,d = extended_gcd(e, n)
-#     
-#     
-#     print("Divisor: " + str(divisor))
-#     print("Public Key: " + str(e))
-#     print("Private Key: " + str(x))
-#     return ((e,n),(x,n))
-# 
-# 
+
+    # ##Generates public Key
+    # divisor = 2
+    # while(divisor != 1):
+    #     e = random.randint(0, n)
+    #     divisor = math.gcd(e, n)
+        
+    # x, y,d = extended_gcd(e, n)
+    
+    
+    # print("Divisor: " + str(divisor))
+    # print("Public Key: " + str(e))
+    # print("Private Key: " + str(x))
+    # return ((e,n),(x,n))
+
+
 
 ## Fermats Test 
 def determine_prime(p,x):

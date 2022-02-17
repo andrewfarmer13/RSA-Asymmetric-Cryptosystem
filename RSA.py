@@ -1,4 +1,4 @@
-##Contributers: Andrew Farmer, Clayton McEntire, Chandler Richmond
+##Contributers: Andrew Farmer, Clayton McEntire
 #import math
 import random
 ## Importing allows for exiting of program without error. 
@@ -37,9 +37,6 @@ def generate():
     y, d,x = extended_gcd(e, n)
        
     
-    golden = (1 + 5 ** 0.5) / 2
-    if d < 0:
-        d = golden + d
     
     
     # public key (e) # Private key (d)
@@ -79,77 +76,61 @@ def extended_gcd(a =1, b = 1):
     (x, y, d) = extended_gcd(b, a%b)
     return y, x - a//b*y, d
 
-def digital():
-    print("test")
 
-##Authenticates the digital signature
-def authenticate():
-    print("test")
     
-#=============================================================================
     
 ##Encrypts with a public key
 def encrypt(string, pubkey):
     
     
-    e, n = pubkey
+    # e, n = pubkey
     
-    string = string.upper()
+    # string = string.upper()
    
-    letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
+    # letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
     
-    i =0
-    while i != len(string):
-       # letters[i] = pow(ord(string[i]),e,n)
-        print("Test " + str(letters[i]))
-        i += 1
+    # i =0
+    # while i != len(string):
+    #    # letters[i] = pow(ord(string[i]),e,n)
+    #     print("Test " + str(letters[i]))
+    #     i += 1
     
-    return letters
+    # return letters
         
     
 ##Decrypts with a private key
 def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
-    key, n = privkey
-    plaintext = ""
-    string = ""
-   
+
+    # key, n = privkey
     
-    for x in encryptedMessage:
-        string += str(encryptedMessage[x])
-    # for char in string:
-    #    plaintext += chr(ord(char)^key mod n)
-        
-    print(string)
-=======
-    d, n = privkey
-   
-   
-    j=0
-    message = ""
-    while j != len(encryptedMessage):
-        hold = encryptedMessage[j]
-        letter = (pow(hold,d)%n)
-        message += chr(int(letter))
-        print("letter ".join(message[j]))
-        letter =0
-        j += 1
-   
-    k=0
-    while k != len(encryptedMessage):
-       print(str(message[k]))
-       k += 1
-     
-    return message
-        
+    # string = ""
+    # x = 0
+    
+    
+    # while x != len(encryptedMessage):
+    #     string += str(pow(encryptedMessage[x], key) % n)
  
-
-
-#=============================================================================
-   
+    # print(string)
+ 
 ##Generate digital signature
-def digital():
-    print("test")
+def digitalSign(message, privkey):
+    key, n = privkey
+    
+    signature = (ord(message)**key) % n
+    
+    return signature
+
+def digitalVerify(signature, pubkey, message):
+    
+    key, n = pubkey
+    
+    verification = (signature ** key) % n
+    
+    if(verification == message):
+        print("Verification successful, message accepted")
+    else:
+        print("Verification unsuccessful, message not accepted")
 
 ##Authenticates the digital signature
 def authenticate():

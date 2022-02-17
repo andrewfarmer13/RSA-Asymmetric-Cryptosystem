@@ -121,9 +121,7 @@ def publicusr(pubKey):
             print("TEST REPLACE LATER")
             return ciphertext
         
-         elif (choice==3):
-             print("Bye for now!")
-             sys.exit();
+       
    
 
 ## Owner of keys

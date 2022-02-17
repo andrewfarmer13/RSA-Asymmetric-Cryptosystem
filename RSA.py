@@ -107,11 +107,15 @@ def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
     key, n = privkey
     plaintext = ""
+    string = ""
    
-    for char in str(encryptedMessage):
-        plaintext += chr(pow(ord(char), key, n))
+    
+    for x in encryptedMessage:
+        string += str(encryptedMessage[x])
+    # for char in string:
+    #    plaintext += chr(ord(char)^key mod n)
         
-    print(plaintext)
+    print(string)
 
     
 ## Public User
@@ -130,9 +134,8 @@ def publicusr(pubKey):
          elif (choice ==2):
             print("TEST REPLACE LATER")
             return ciphertext
-        
-       
-   
+    
+     return ciphertext
 
 ## Owner of keys
 def owner(privkey,encryptedMessage):

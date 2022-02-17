@@ -86,6 +86,7 @@ def encrypt(string, pubkey):
    key, n = pubkey
    ciphertext = ""
    string = string.upper()
+   
    for char in string:
        ciphertext = (pow(ord(char), key, n))
 

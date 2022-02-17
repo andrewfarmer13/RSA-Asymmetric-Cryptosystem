@@ -36,10 +36,7 @@ def generate():
     
     y, d,x = extended_gcd(e, n)
        
-    
-    golden = (1 + 5 ** 0.5) / 2
-    if d < 0:
-        d = golden + d
+
     
     
     # public key (e) # Private key (d)
@@ -112,7 +109,7 @@ def decrypt(privkey, encryptedMessage):
     message = ""
     while j != len(encryptedMessage):
         hold = encryptedMessage[j]
-        letter = (pow(hold,d)%n)
+        letter = (pow(hold,d,n)
         message += chr(int(letter))
         print("letter ".join(message[j]))
         letter =0

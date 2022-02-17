@@ -36,10 +36,6 @@ def generate():
     
     y, d,x = extended_gcd(e, n)
        
-<<<<<<< HEAD
-
-=======
-    
     
     
     # public key (e) # Private key (d)
@@ -81,8 +77,6 @@ def extended_gcd(a =1, b = 1):
 
 
     
-#=============================================================================
-    
 ##Encrypts with a public key
 def encrypt(string, pubkey):
     
@@ -105,7 +99,7 @@ def encrypt(string, pubkey):
 ##Decrypts with a private key
 def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
-<<<<<<< HEAD
+
     d, n = privkey
    
    

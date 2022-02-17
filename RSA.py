@@ -83,14 +83,23 @@ def authenticate():
     
 ##Encrypts with a public key
 def encrypt(string, pubkey):
-   key, n = pubkey
-   ciphertext = ""
-   string = string.upper()
-   
-   for char in string:
-       ciphertext = (pow(ord(char), key, n))
-
-   return ciphertext
+    
+    
+    e, n = pubkey
+    
+    string = string.upper()
+    
+    ## Creates a list of the encrypted text as intigers
+    letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
+    
+    ## DELETE AFTER DECODING IS IMPLEMENTED
+    i =0
+    while i != len(string):
+       # letters[i] = pow(ord(string[i]),e,n)
+        print("Test " + str(letters[i]))
+        i += 1
+    
+    return letters
         
     
 ##Decrypts with a private key

@@ -99,17 +99,35 @@ def encrypt(string, pubkey):
     
     return letters
         
-    
+# CURRENTLY NON WORKING 
+
 ##Decrypts with a private key
 def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
-    key, n = privkey
-    plaintext = ""
+    d, n = privkey
+    print("Test " + str(encryptedMessage[0]))
+    print("Test " + str(encryptedMessage[1]))
+    print("Test " + str(encryptedMessage[2]))
+    print("Test " + str(encryptedMessage[3]))
+    print("Test " + str(encryptedMessage[4]))
    
-    for char in str(encryptedMessage):
-        plaintext += chr(pow(ord(char), key, n))
+    j=0
+    message = ""
+    while j != len(encryptedMessage):
+        hold = encryptedMessage[j]
+        letter = (pow(hold,d)%n)
+        message += chr(int(letter))
+        print("letter ".join(message[j]))
+        letter =0
+        j += 1
+   
+    k=0
+    while k != len(encryptedMessage):
+       print(str(message[k]))
+       k += 1
+     
+    return message
         
-    print(plaintext)
 
     
 ## Public User

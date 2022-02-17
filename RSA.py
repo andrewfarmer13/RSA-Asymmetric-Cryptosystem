@@ -1,4 +1,4 @@
-##Contributers: Andrew Farmer, Clayton McEntire, Chandler Richmond
+##Contributers: Andrew Farmer, Clayton McEntire
 #import math
 import random
 ## Importing allows for exiting of program without error. 
@@ -36,7 +36,10 @@ def generate():
     
     y, d,x = extended_gcd(e, n)
        
+<<<<<<< HEAD
 
+=======
+    
     
     
     # public key (e) # Private key (d)
@@ -84,24 +87,25 @@ def extended_gcd(a =1, b = 1):
 def encrypt(string, pubkey):
     
     
-    e, n = pubkey
+    # e, n = pubkey
     
-    string = string.upper()
+    # string = string.upper()
    
-    letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
+    # letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
     
-    i =0
-    while i != len(string):
-       # letters[i] = pow(ord(string[i]),e,n)
-        print("Test " + str(letters[i]))
-        i += 1
+    # i =0
+    # while i != len(string):
+    #    # letters[i] = pow(ord(string[i]),e,n)
+    #     print("Test " + str(letters[i]))
+    #     i += 1
     
-    return letters
+    # return letters
         
     
 ##Decrypts with a private key
 def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
+<<<<<<< HEAD
     d, n = privkey
    
    
@@ -125,11 +129,35 @@ def decrypt(privkey, encryptedMessage):
  
 
 
-#=============================================================================
-   
+    # key, n = privkey
+    
+    # string = ""
+    # x = 0
+    
+    
+    # while x != len(encryptedMessage):
+    #     string += str(pow(encryptedMessage[x], key) % n)
+ 
+    # print(string)
+ 
 ##Generate digital signature
-def digital():
-    print("test")
+def digitalSign(message, privkey):
+    key, n = privkey
+    
+    signature = (ord(message)**key) % n
+    
+    return signature
+
+def digitalVerify(signature, pubkey, message):
+    
+    key, n = pubkey
+    
+    verification = (signature ** key) % n
+    
+    if(verification == message):
+        print("Verification successful, message accepted")
+    else:
+        print("Verification unsuccessful, message not accepted")
 
 ##Authenticates the digital signature
 def authenticate():
@@ -151,9 +179,8 @@ def publicusr(pubKey):
          elif (choice ==2):
             print("TEST REPLACE LATER")
             return ciphertext
-        
-       
-   
+    
+     return ciphertext
 
 ## Owner of keys
 def owner(privkey,encryptedMessage):

@@ -40,6 +40,7 @@ def generate():
 
 =======
     
+>>>>>>> 9cda65a3e3b7c26bf435f2fde2938b6a771e538b
     
     
     # public key (e) # Private key (d)
@@ -81,7 +82,6 @@ def extended_gcd(a =1, b = 1):
 
 
     
-#=============================================================================
     
 ##Encrypts with a public key
 def encrypt(string, pubkey):
@@ -128,6 +128,8 @@ def decrypt(privkey, encryptedMessage):
         
  
 
+=======
+>>>>>>> 9cda65a3e3b7c26bf435f2fde2938b6a771e538b
 
     # key, n = privkey
     

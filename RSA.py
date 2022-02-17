@@ -33,32 +33,13 @@ def generate():
     
     ## Calles Extended Euclid 
     ## Finds d multiplicative inverse of e
-    x, y,d = extended_gcd(e, n)
+    d, y,x = extended_gcd(e, n)
        
     # public key (e) # Private key (d)
 
     ## public key and Private key
-    return(((e,n), (x,n)))
+    return(((e,n), (d,n)))
    
-
-   
-## TEMPARARALY COMMENTED OUT 
-## TO UNCOMMENT PLEASE SELECT TEXT AND PRESS CTRL + 1
-
-    # ##Generates public Key
-    # divisor = 2
-    # while(divisor != 1):
-    #     e = random.randint(0, n)
-    #     divisor = math.gcd(e, n)
-        
-    # x, y,d = extended_gcd(e, n)
-    
-    
-    # print("Divisor: " + str(divisor))
-    # print("Public Key: " + str(e))
-    # print("Private Key: " + str(x))
-    # return ((e,n),(x,n))
-
 
 
 ## Fermats Test 
@@ -122,8 +103,6 @@ def decrypt(privkey, encryptedMessage):
         
     print(plaintext)
 
-
-
     
 ## Public User
 def publicusr(pubKey):
@@ -146,10 +125,6 @@ def publicusr(pubKey):
              print("Bye for now!")
              sys.exit();
    
-     
-
-
-
 
 ## Owner of keys
 def owner(privkey,encryptedMessage):
@@ -168,7 +143,6 @@ def main():
     print(str(public) + " " +str(private))
     
 
-    
     while(choice != 3):
         print("\nPlease select your user type:")
         print("1. Public User \n2. The owner of the keys \n3. Exit Program")
@@ -181,8 +155,6 @@ def main():
              print("Bye for now!")
              sys.exit();
   
-          
-    
-        
+       
 ## Starts Main   
 main()

@@ -82,19 +82,19 @@ def extended_gcd(a =1, b = 1):
 def encrypt(string, pubkey):
     
     
-    # e, n = pubkey
+    e, n = pubkey
     
-    # string = string.upper()
+    string = string.upper()
    
-    # letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
+    letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
     
-    # i =0
-    # while i != len(string):
-    #    # letters[i] = pow(ord(string[i]),e,n)
-    #     print("Test " + str(letters[i]))
-    #     i += 1
+    i =0
+    while i != len(string):
+    letters[i] = pow(ord(string[i]),e,n)
+    print("Test " + str(letters[i]))
+    i += 1
     
-    # return letters
+    return letters
         
     
 ##Decrypts with a private key
@@ -121,20 +121,7 @@ def decrypt(privkey, encryptedMessage):
      
     return message
         
- 
 
-
-
-    # key, n = privkey
-    
-    # string = ""
-    # x = 0
-    
-    
-    # while x != len(encryptedMessage):
-    #     string += str(pow(encryptedMessage[x], key) % n)
- 
-    # print(string)
  
 ##Generate digital signature
 def digitalSign(message, privkey):

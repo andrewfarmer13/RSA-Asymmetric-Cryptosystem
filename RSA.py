@@ -1,5 +1,5 @@
 ##Contributers: Andrew Farmer, Clayton McEntire, Chandler Richmond
-import math
+#import math
 import random
 ## Importing allows for exiting of program without error. 
 import sys
@@ -7,17 +7,13 @@ import sys
 ##Generates both public and private keys
 def generate():
     
-
     t= False
     ##We need to add a generate prime number function to get a larger n
     ##Max Size
     n = 500000
     ## Min Size
     m = 10000
-    
-    
-    
-    
+   
     while(t == False):
         ## Generate Public Key
         p = random.randint(m,n);
@@ -29,22 +25,22 @@ def generate():
         t = determine_prime(p,q)
         ## If it is not prime re-call the function untill a prime is found 
         
+   
+    ## Euclid's GCD (FINDS e )
+    ## Finds Realitive prime from psudo primes
+    e=(p-1)*(q-1) 
+    n = p*q;
+    
+    ## Calles Extended Euclid 
+    ## Finds d multiplicative inverse of e
+    x, y,d = extended_gcd(e, n)
        
-    z=p*q 
-    
-    pq=(p-1)*(q-1)
-    e = random.randint(m,pq)
-    divisor = math.gcd(e, pq)
-    while(divisor !=1):
-        e = random.randint(m,z)
-        divisor = math.gcd(e,pq)
-        
-    pubkey=e
-    
-    privkey = multiplicative_inverse(e, pq)
-    
-    ## ALSO TEMPARARY DELETE WHEN BELOW IS UNCOMMMENTED
-    return(((pubkey,n), (privkey,n)))
+    # public key (e) # Private key (d)
+
+    ## public key and Private key
+    return(((e,n), (x,n)))
+   
+
    
 ## TEMPARARALY COMMENTED OUT 
 ## TO UNCOMMENT PLEASE SELECT TEXT AND PRESS CTRL + 1
@@ -86,32 +82,10 @@ def determine_prime(p,x):
     ## Returns t to let generate know if it is prime or not
     return t
 
-def multiplicative_inverse(e, pq):
-    d = 0
-    x1 = 0
-    x2 = 1
-    y1 = 1
-    temp_pq = pq
-
-    while e > 0:
-        temp1 = temp_pq//e
-        temp2 = temp_pq - temp1 * e
-        temp_pq = e
-        e = temp2
-
-        x = x2 - temp1 * x1
-        y = d - temp1 * y1
-
-        x2 = x1
-        x1 = x
-        d = y1
-        y1 = y
-
-    if temp_pq == 1:
-        return d + pq
 
  ##Extended GCD
 def extended_gcd(a =1, b = 1):
+    
     if b == 0:
         return (1, 0, a)
     (x, y, d) = extended_gcd(b, a%b)

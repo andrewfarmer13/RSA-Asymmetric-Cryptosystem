@@ -33,8 +33,15 @@ def generate():
     
     ## Calles Extended Euclid 
     ## Finds d multiplicative inverse of e
-    d, y,x = extended_gcd(e, n)
+    
+    y, d,x = extended_gcd(e, n)
        
+    
+    golden = (1 + 5 ** 0.5) / 2
+    if d < 0:
+        d = golden + d
+    
+    
     # public key (e) # Private key (d)
 
     ## public key and Private key
@@ -72,14 +79,9 @@ def extended_gcd(a =1, b = 1):
     (x, y, d) = extended_gcd(b, a%b)
     return y, x - a//b*y, d
 
-   
-##Generate digital signature
-def digital():
-    print("test")
 
-##Authenticates the digital signature
-def authenticate():
-    print("test")
+    
+#=============================================================================
     
 ##Encrypts with a public key
 def encrypt(string, pubkey):
@@ -99,17 +101,12 @@ def encrypt(string, pubkey):
     
     return letters
         
-# CURRENTLY NON WORKING 
-
+    
 ##Decrypts with a private key
 def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
     d, n = privkey
-    print("Test " + str(encryptedMessage[0]))
-    print("Test " + str(encryptedMessage[1]))
-    print("Test " + str(encryptedMessage[2]))
-    print("Test " + str(encryptedMessage[3]))
-    print("Test " + str(encryptedMessage[4]))
+   
    
     j=0
     message = ""
@@ -128,7 +125,18 @@ def decrypt(privkey, encryptedMessage):
      
     return message
         
+ 
 
+
+#=============================================================================
+   
+##Generate digital signature
+def digital():
+    print("test")
+
+##Authenticates the digital signature
+def authenticate():
+    print("test")
     
 ## Public User
 def publicusr(pubKey):
@@ -158,7 +166,6 @@ def owner(privkey,encryptedMessage):
    message = decrypt(privkey, encryptedMessage)
    print(message)
 
-
 ##Driver Function
 def main():
     public, private = generate()
@@ -166,7 +173,6 @@ def main():
     
     print(str(public) + " " +str(private))
     
-
     while(choice != 3):
         print("\nPlease select your user type:")
         print("1. Public User \n2. The owner of the keys \n3. Exit Program")
@@ -176,8 +182,7 @@ def main():
         elif choice == 2:
             owner(private, encryptedMessage)
         elif choice ==3:
-             print("Bye for now!")
-             sys.exit();
+            sys.exit();
   
        
 ## Starts Main   

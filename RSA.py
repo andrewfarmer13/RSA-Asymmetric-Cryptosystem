@@ -92,13 +92,14 @@ def encrypt(string, pubkey):
     
     # return letters
     
-    print(str(e))
+   
+    #print(str(e))
     
     for x in range(length):
         temp = ord(string[x])
         temp = pow(temp, e)
         temp = temp % n
-        print(str(temp))
+        #print(str(temp))
         letters.append(temp)
     return letters
  
@@ -149,13 +150,13 @@ def decrypt(privkey, list):
 
     for x in range(length):
         letters.append(chr(pow(list[x], d, n)))
-        print(str(letters[x]))
+        #print(str(letters[x]))
         
         
     for x in range(len(letters)):
-        plain += str(letters[x])
+         plain += str(letters[x])
         
-    print (plain)
+   # print (plain)
    
     # j=0
     # message = ""

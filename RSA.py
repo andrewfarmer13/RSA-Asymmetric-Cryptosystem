@@ -91,6 +91,14 @@ def determine_prime(p,x):
 # =============================================================================
 
     
+ ##Extended GCD
+def extended_gcd(a =1, b = 1):
+    
+    if b == 0:
+        return (1, 0, a)
+    (x, y, d) = extended_gcd(b, a%b)
+    return y, x - a//b*y, d
+
 ##Encrypts with a public key
 def encrypt(string, pubkey):
     

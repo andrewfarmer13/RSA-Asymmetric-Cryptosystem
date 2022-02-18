@@ -4,22 +4,24 @@ import random
 ## Importing allows for exiting of program without error. 
 import sys
 
+
 ##Generates both public and private keys
 def generate():
     
     t= False
     ##We need to add a generate prime number function to get a larger n
     ##Max Size
-    n = 500000
+    n = 50
     ## Min Size
-    m = 10000
+    m = 25
    
     while(t == False):
         ## Generate Public Key
         p = random.randint(m,n);
         
         q = random.randint(m,n);
-       
+        p = 11
+        q= 5
         ## Call Fermats test
         ## Function will determine true or false if prime 
         t = determine_prime(p,q)
@@ -28,30 +30,32 @@ def generate():
    
     ## Euclid's GCD (FINDS e )
     ## Finds Realitive prime from psudo primes
-    e=(p-1)*(q-1) 
-    n = p*q;
+    #e=(p-1)*(q-1) 
+    totient  =(p-1)*(q-1) 
+  
     
+    n = p*q;
+    print("p "+str(p))
+    print("q "+str(q))
     ## Calles Extended Euclid 
     ## Finds d multiplicative inverse of e
     
-    y, d,x = extended_gcd(e, n)
-       
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 9cda65a3e3b7c26bf435f2fde2938b6a771e538b
-=======
->>>>>>> 5a030ca4a8a22f3c7e7555b1bd7a5ede34726778
-    
+    x, y,d = extended_gcd( totient, 7)
+   
+    print("d "+str(d))
     
     # public key (e) # Private key (d)
-
+    e=0
     ## public key and Private key
     return(((e,n), (d,n)))
-   
 
+def extended_gcd(a, b):
+    if a == 0:
+        return b, 0, 1
+    else:
+        gcd, x, y = extended_gcd(b % a, a)
+        return gcd, y - (b // a) * x, x
 
 ## Fermats Test 
 def determine_prime(p,x):
@@ -74,79 +78,55 @@ def determine_prime(p,x):
     ## Returns t to let generate know if it is prime or not
     return t
 
+# =============================================================================
+# 
+#  ##Extended GCD
+# def extended_gcd(a =1, b = 1):
+#     
+#     if b == 0:
+#         return (1, 0, a)
+#     (x, y, d) = extended_gcd(b, a%b)
+#     return y, x - a//b*y, d
+# 
+# =============================================================================
 
- ##Extended GCD
-def extended_gcd(a =1, b = 1):
     
-    if b == 0:
-        return (1, 0, a)
-    (x, y, d) = extended_gcd(b, a%b)
-    return y, x - a//b*y, d
-
-
-    
-<<<<<<< HEAD
-    
-=======
->>>>>>> 5a030ca4a8a22f3c7e7555b1bd7a5ede34726778
 ##Encrypts with a public key
 def encrypt(string, pubkey):
     
     
-    # e, n = pubkey
+    e, n = pubkey
     
-    # string = string.upper()
+    string = string.upper()
+    print("H is " +str(ord(string[1])))
    
-    # letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
+    letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
     
-    # i =0
-    # while i != len(string):
-    #    # letters[i] = pow(ord(string[i]),e,n)
-    #     print("Test " + str(letters[i]))
-    #     i += 1
+    i =0
+    while i != len(string):
+       # letters[i] = pow(ord(string[i]),e,n)
+        print("Test " + str(letters[i]))
+        i += 1
     
-    # return letters
+    return letters
         
     
 ##Decrypts with a private key
 def decrypt(privkey, encryptedMessage):
     # Unpack the key into its components
-
     d, n = privkey
-   
-   
+
     j=0
     message = ""
     while j != len(encryptedMessage):
-        hold = encryptedMessage[j]
-        letter = (pow(hold,d,n)
-        message += chr(int(letter))
-        print("letter ".join(message[j]))
-        letter =0
+        letter = pow(encryptedMessage[j],d,n)
+        message += str(chr(letter))
+            
         j += 1
-   
-    k=0
-    while k != len(encryptedMessage):
-       print(str(message[k]))
-       k += 1
-     
+
     return message
         
- 
 
-=======
->>>>>>> 9cda65a3e3b7c26bf435f2fde2938b6a771e538b
-
-    # key, n = privkey
-    
-    # string = ""
-    # x = 0
-    
-    
-    # while x != len(encryptedMessage):
-    #     string += str(pow(encryptedMessage[x], key) % n)
- 
-    # print(string)
  
 ##Generate digital signature
 def digitalSign(message, privkey):

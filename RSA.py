@@ -31,7 +31,7 @@ def generate():
     ## Euclid's GCD (FINDS e )
     ## Finds Realitive prime from psudo primes
     #e=(p-1)*(q-1) 
-    totient  =(p-1)*(q-1) 
+    phi  =(p-1)*(q-1) 
   
     
     n = p*q;
@@ -39,11 +39,15 @@ def generate():
     print("q "+str(q))
     ## Calles Extended Euclid 
     ## Finds d multiplicative inverse of e
+
     
-    
-    x, y,d = extended_gcd( totient, 7)
+    x, y,d = extended_gcd( phi, 7)
    
     print("d "+str(d))
+
+        
+
+
     
     # public key (e) # Private key (d)
     e=0
@@ -88,9 +92,7 @@ def determine_prime(p,x):
 #     (x, y, d) = extended_gcd(b, a%b)
 #     return y, x - a//b*y, d
 # 
-# =============================================================================
 
-    
  ##Extended GCD
 def extended_gcd(a =1, b = 1):
     
@@ -99,6 +101,9 @@ def extended_gcd(a =1, b = 1):
     (x, y, d) = extended_gcd(b, a%b)
     return y, x - a//b*y, d
 
+
+    
+
 ##Encrypts with a public key
 def encrypt(string, pubkey):
     
@@ -106,16 +111,23 @@ def encrypt(string, pubkey):
     e, n = pubkey
     
     string = string.upper()
+
     print("H is " +str(ord(string[1])))
+
    
     letters = [pow(ord(string[i]),e,n) for i in range(len(string))]
     
     i =0
     while i != len(string):
+
        # letters[i] = pow(ord(string[i]),e,n)
         print("Test " + str(letters[i]))
         i += 1
-    
+
+    letters[i] = pow(ord(string[i]),e,n)
+    print("Test " + str(letters[i]))
+    i += 1
+  
     return letters
         
     
